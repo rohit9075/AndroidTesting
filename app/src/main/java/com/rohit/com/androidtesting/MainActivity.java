@@ -1,17 +1,24 @@
 package com.rohit.com.androidtesting;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button mButtonShowText;
-    EditText mEdittext;
-    TextView mTextView;
+    @BindView(R.id.editText)
+    EditText editText;
+    @BindView(R.id.button)
+    Button button;
+    @BindView(R.id.textView)
+    TextView textView;
 
 
     @Override
@@ -19,19 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mButtonShowText = findViewById(R.id.button);
-        mEdittext = findViewById(R.id.editText);
-        mTextView = findViewById(R.id.textView);
-
-        mButtonShowText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = mEdittext.getText().toString();
-                mTextView.setText(name);
-            }
-        });
+        ButterKnife.bind(this);
 
     }
 
+    @OnClick(R.id.button)
+    public void onClick() {
+        String name = editText.getText().toString();
+        textView.setText(name);
+    }
 }
